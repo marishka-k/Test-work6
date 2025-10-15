@@ -2,6 +2,7 @@
   "name": "my-auth-project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://marishka-k.github.io/Test-work6",
   "dependencies": {
     "@tanstack/react-query": "^5.90.3",
     "@testing-library/dom": "^10.4.1",
