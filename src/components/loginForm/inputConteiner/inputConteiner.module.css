@@ -1,0 +1,43 @@
+.container {
+  display: grid;
+  margin: 0;
+  padding: 8px 11px;
+  grid-template-columns: 16px 1fr;
+  column-gap: 4px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: inherit;  
+  align-items: center;
+}
+
+.container.error{
+  border-color: #FF4D4F;
+}
+
+.container.focused {
+  border-color: #1677ff;
+}
+
+.logo {
+  width: 16px;
+  height: 16px;
+  border-radius: 15px;
+}
+
+.input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  width: 100%;
+  background: transparent;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+
+.input::placeholder {
+  color: #d9d9d9;
+}

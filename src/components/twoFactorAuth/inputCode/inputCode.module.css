@@ -1,0 +1,30 @@
+.container{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;  
+}
+
+.error{
+  border-color: #FF4D4F;
+}
+
+.focused {
+  border: 1px solid #1677ff;
+}
+
+.input{
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  text-align: center;  
+  background-color: inherit;  
+  align-items: center;
+}
+
