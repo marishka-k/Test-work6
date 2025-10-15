@@ -59,7 +59,7 @@ export const LoginForm = ({onSuccess, savedCredentials}) => {
         <div className={styles.inputs_content}>
           <ul className={styles.inputs}>
             <InputConteiner key='email' icon={emailIcon} type="email" placeholder = 'Email' text={email} onChange={handleChangeEmail} isPending={isPending} showError={!!error}/>
-            <InputConteiner key='password' icon={passwordIcon} type="password" placeholder = 'password' text={password} onChange={handleChangePassword} isPending={isPending} showError={!!error}/>
+            <InputConteiner key='password' icon={passwordIcon} type="password" placeholder = 'Password' text={password} onChange={handleChangePassword} isPending={isPending} showError={!!error}/>
           </ul>
           {!!error && (
             <div className={styles.error_text}> {error} </div>
