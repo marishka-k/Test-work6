@@ -11,9 +11,8 @@ function App() {
   const queryClient = new QueryClient();
 
   const handleLoginSuccess = (credentials) => {
-      setSavedCredentials(credentials);
-      setScreen('2fa');
-    
+    setSavedCredentials(credentials);
+    setScreen('2fa');    
   };
 
   const handle2FABack = () => {
@@ -21,9 +20,9 @@ function App() {
      
   };
 
-  const handle2FAVerify = () => {
+  const handle2FAVerify = (message) => {
     localStorage.setItem('token', 'fake-jwt-token');
-    alert('✅ Вход выполнен!');  
+    alert(`✅ ${message}`);  
   };
 
   return (

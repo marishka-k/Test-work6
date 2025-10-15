@@ -9,7 +9,7 @@ import { ButtonSubmit } from '../loginForm/buttonSubmit/buttonSubmit';
 export const TwoFactorAuth = ({ onVerify, onBack }) => {
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const { mutate, isPending } = useVerifyCode();
-  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState('');
   const [timeLeft, setTimeLeft] = useState(60); // Таймер: 60 секунд
   const [isTimerActive, setIsTimerActive] = useState(true); // Активен ли таймер
 
@@ -31,7 +31,7 @@ export const TwoFactorAuth = ({ onVerify, onBack }) => {
     }
 
     // Скрываем ошибку при любом изменении
-    if (showError) setShowError(false);
+    if (!!error) setError(false);
   };
 
   // Обработчик нажатия клавиш (Backspace)
@@ -48,7 +48,7 @@ export const TwoFactorAuth = ({ onVerify, onBack }) => {
     setCode(['', '', '', '', '', '']);
     setTimeLeft(60);
     setIsTimerActive(true);
-    setShowError(false);
+    setError('');
     inputs.current[0]?.focus();
   };
 
@@ -60,11 +60,11 @@ export const TwoFactorAuth = ({ onVerify, onBack }) => {
       
       const fullCode = code.join('');
       mutate(fullCode, {
-        onSuccess: () => {
-          onVerify(); // Успешная 2FA
+        onSuccess: (res) => {
+          onVerify(res.message); // Успешная 2FA
         },
         onError: (error) => {
-          setShowError(true);
+          setError(error.message);
         },
       });
     } else {
@@ -116,18 +116,18 @@ export const TwoFactorAuth = ({ onVerify, onBack }) => {
                 handleKeyDown={handleKeyDown}
                 index={index}                
                 digit={digit}
-                showError={showError}
+                showError={!!error}
               />              
             ))}
           </ul>
-          {showError && (
-            <div className={styles.error_text}> This is a caption under a text input. </div>
+          {!!error && (
+            <div className={styles.error_text}> {error} </div>
           )}
         </div>
         {isTimerActive && isComplete &&
-          <ButtonSubmit isPending={isPending} isFormValid={isComplete && isTimerActive} showError={showError} name = 'Continue'/>
+          <ButtonSubmit isPending={isPending} isFormValid={isComplete && isTimerActive} showError={!!error} name = 'Continue'/>
         }
-        {!isTimerActive && <ButtonSubmit isFormValid={!isTimerActive} showError={showError} name = 'Get new'/>       
+        {!isTimerActive && <ButtonSubmit isFormValid={!isTimerActive} showError={!!error} name = 'Get new'/>       
         }
       </form>
       

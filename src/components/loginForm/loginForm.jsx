@@ -11,7 +11,7 @@ export const LoginForm = ({onSuccess, savedCredentials}) => {
   const { mutate, isPending } = useLogin();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState('');
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isValidPassword = password.length >= 6;
@@ -34,8 +34,8 @@ export const LoginForm = ({onSuccess, savedCredentials}) => {
             onSuccess({ email, password });
           }
         },
-        onError: () => {
-          setShowError(true);
+        onError: (error) => {
+          setError(error.message);
         },
       }
     );
@@ -43,12 +43,12 @@ export const LoginForm = ({onSuccess, savedCredentials}) => {
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
-    if (showError) setShowError(false);
+    if (!!error) setError('');
   };
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
-    if (showError) setShowError(false);
+    if (!!error) setError('');
   };
 
   return (
@@ -58,14 +58,14 @@ export const LoginForm = ({onSuccess, savedCredentials}) => {
         <h2 className={styles.title} >Sign in to your account to continue</h2>
         <div className={styles.inputs_content}>
           <ul className={styles.inputs}>
-            <InputConteiner key='email' icon={emailIcon} type="email" placeholder = 'Email' text={email} onChange={handleChangeEmail} isPending={isPending} showError={showError}/>
-            <InputConteiner key='password' icon={passwordIcon} type="password" placeholder = 'password' text={password} onChange={handleChangePassword} isPending={isPending} showError={showError}/>
+            <InputConteiner key='email' icon={emailIcon} type="email" placeholder = 'Email' text={email} onChange={handleChangeEmail} isPending={isPending} showError={!!error}/>
+            <InputConteiner key='password' icon={passwordIcon} type="password" placeholder = 'password' text={password} onChange={handleChangePassword} isPending={isPending} showError={!!error}/>
           </ul>
-          {showError && (
-            <div className={styles.error_text}> Invalid email or password </div>
+          {!!error && (
+            <div className={styles.error_text}> {error} </div>
           )}
         </div>
-        <ButtonSubmit isPending={isPending} isFormValid={isFormValid} showError={showError} name = 'Log In'/>
+        <ButtonSubmit isPending={isPending} isFormValid={isFormValid} showError={!!error} name = 'Log In'/>
         
       </form>
     </>  
